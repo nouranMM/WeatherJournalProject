@@ -1,4 +1,4 @@
-# ####Weather Journal Project
+# Weather Journal Project
 
 ### Overview:
 ---
