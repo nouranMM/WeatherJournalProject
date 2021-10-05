@@ -22,7 +22,7 @@
    margin-top: 25px; 
     background: rgba(255, 255, 255, 0.623);
     width: 700px;
-    color: #3e5983cc;;
+    color: #3e5983cc;
     font-size: 22px;
     font-weight: bolder;
     text-align: center;   
@@ -32,12 +32,15 @@
 
 .headline {
     background-color: rgb(60 101 164);
-    
-    
     height: 200px;
     border: 1px solid rgb(184, 193, 210);
     border-radius: 5px;
     box-shadow: 8px 8px 10px silver; 
+
+}
+
+.spanValues{
+    color: #3e5983cc;
 
 }
 

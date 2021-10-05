@@ -6,13 +6,13 @@ let btngenerate=document.querySelector("#generate")
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getMonth()+1+'/'+ d.getDate()+'/'+ d.getFullYear();
   console.log(newDate); 
   
 // Personal API Key for OpenWeatherMap API
 
-const apiURL='https://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey='&appid=88d2f0143175e3228f3f06c6e8e73db5';
+const apiURL='https://api.openweathermap.org/data/2.5/weather?units=metric&zip=';
+const apiKey='&appid=';
 
 // Event listener to add function to existing HTML DOM element
 btngenerate.addEventListener('click',clickEvent);
@@ -23,14 +23,22 @@ function clickEvent()
 {
      zipValue = zip.value;
      content= feelID.value;
-     getTemp(apiURL,zipValue,apiKey)
+     if( zipValue === "")
+     {
+         alert("Please Write the zip code for the city");
+     }
+     else
+     {
+        getTemp(apiURL,zipValue,apiKey)
 
-     .then(function (data){
-        postData('/addData', { Date:newDate , Temperature:data.main.temp , Content:content});
+        .then(function (data){
+           postData('/addData', { Date:newDate , Temperature:data.main.temp , Content:content});
+   
+           getProjectData();
+        }
+    )
 
-        getProjectData();
-     })
-
+    }
 }
 
 /* Function to GET Web API Data*/
@@ -74,9 +82,9 @@ const postData = async (url, data = {})=>{
 
 
 /* Function to GET Project Data */
-let dateInfo=document.querySelector('#date');
-let tempInfo=document.querySelector('#temp');
-let contentInfo=document.querySelector('#content');
+let dateInfo=document.querySelector('#dateValue');
+let tempInfo=document.querySelector('#tempValue');
+let contentInfo=document.querySelector('#contentValue');
 
 console.log(dateInfo);
 
@@ -85,9 +93,9 @@ const getProjectData = async() => {
     try{
         const entryData =await request.json();
         console.log(entryData);
-        dateInfo.innerHTML+= entryData.Date;
-        tempInfo.innerHTML+=entryData.Temperature;
-        contentInfo.innerHTML+=entryData.Content;
+        dateInfo.innerHTML = entryData.Date;
+        tempInfo.innerHTML =entryData.Temperature;
+        contentInfo.innerHTML =entryData.Content;
 
     }
     catch(error){
